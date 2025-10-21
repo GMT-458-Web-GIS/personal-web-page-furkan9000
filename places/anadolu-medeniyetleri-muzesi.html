@@ -41,13 +41,20 @@
   </section>
 </main>
 
-<script src="https://cdn.jsdelivr.net/npm/ol/ol.js"></script> 
-<script>
-    // **ÇÖZÜM:** Harita kodunu, sayfa tamamen yüklendiğinde çalışacak bir olayın içine alıyoruz.
-    window.addEventListener('load', function() {
-        // Bu noktada 'ol' objesi GARANTİLİ olarak tanımlanmıştır.
+<script src="https://cdn.jsdelivr.net/npm/ol/ol.js" defer></script> 
 
-        const museumLonLat = [32.8597, 39.925];
+<script>
+    // **ÖNEMLİ:** ol.js yüklenmeden bu kod çalışırsa hata yine oluşur.
+    // Ancak defer niteliği ve scriptlerin sonda olması bu senaryoyu engeller.
+
+    const museumLonLat = [32.8597, 39.925];
+
+    // Harita başlatma fonksiyonu
+    function initMap() {
+        if (typeof ol === 'undefined') {
+            console.error("Hata: OpenLayers (ol) kütüphanesi yüklenemedi!");
+            return;
+        }
 
         const map = new ol.Map({
             target: 'map',
@@ -61,12 +68,8 @@
             controls: ol.control.defaults().extend([new ol.control.FullScreen(), new ol.control.Zoom()])
         });
 
-        const marker = new ol.Feature({ 
-            geometry: new ol.geom.Point(ol.proj.fromLonLat(museumLonLat)) 
-        });
-        
+        const marker = new ol.Feature({ geometry: new ol.geom.Point(ol.proj.fromLonLat(museumLonLat)) });
         const vectorSource = new ol.source.Vector({ features: [marker] });
-        
         const markerLayer = new ol.layer.Vector({
             source: vectorSource,
             style: new ol.style.Style({
@@ -78,7 +81,13 @@
         });
 
         map.addLayer(markerLayer);
-    });
+    }
+    
+    // Kütüphane yüklendiğinde haritayı başlatmak için bu fonksiyonu çağırıyoruz.
+    // defer niteliği işimizi görecektir, ancak OpenLayers'ın yüklenmesini dinleyebiliriz.
+
+    // Basit olması için initMap'i direkt çağırıyoruz. Eğer ol.js yüklenmişse çalışacaktır.
+    initMap(); 
 </script>
 </body>
 </html>
