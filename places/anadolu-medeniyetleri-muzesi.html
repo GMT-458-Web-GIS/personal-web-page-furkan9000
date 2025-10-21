@@ -53,42 +53,39 @@
   </main>
 
   <!-- OpenLayers ES Module Script -->
-  <script type="module">
-    import 'https://cdn.jsdelivr.net/npm/ol/ol.css';
-    import Map from 'https://cdn.jsdelivr.net/npm/ol/Map.js';
-    import View from 'https://cdn.jsdelivr.net/npm/ol/View.js';
-    import TileLayer from 'https://cdn.jsdelivr.net/npm/ol/layer/Tile.js';
-    import OSM from 'https://cdn.jsdelivr.net/npm/ol/source/OSM.js';
-    import {defaults as defaultControls, FullScreen, Zoom} from 'https://cdn.jsdelivr.net/npm/ol/control.js';
-    import Feature from 'https://cdn.jsdelivr.net/npm/ol/Feature.js';
-    import Point from 'https://cdn.jsdelivr.net/npm/ol/geom/Point.js';
-    import VectorSource from 'https://cdn.jsdelivr.net/npm/ol/source/Vector.js';
-    import VectorLayer from 'https://cdn.jsdelivr.net/npm/ol/layer/Vector.js';
-    import Style from 'https://cdn.jsdelivr.net/npm/ol/style/Style.js';
-    import Icon from 'https://cdn.jsdelivr.net/npm/ol/style/Icon.js';
-    import {fromLonLat} from 'https://cdn.jsdelivr.net/npm/ol/proj.js';
+<script type="module">
+  import Map from 'https://cdn.jsdelivr.net/npm/ol/Map.js';
+  import View from 'https://cdn.jsdelivr.net/npm/ol/View.js';
+  import TileLayer from 'https://cdn.jsdelivr.net/npm/ol/layer/Tile.js';
+  import OSM from 'https://cdn.jsdelivr.net/npm/ol/source/OSM.js';
+  import {defaults as defaultControls, FullScreen, Zoom} from 'https://cdn.jsdelivr.net/npm/ol/control.js';
+  import Feature from 'https://cdn.jsdelivr.net/npm/ol/Feature.js';
+  import Point from 'https://cdn.jsdelivr.net/npm/ol/geom/Point.js';
+  import VectorSource from 'https://cdn.jsdelivr.net/npm/ol/source/Vector.js';
+  import VectorLayer from 'https://cdn.jsdelivr.net/npm/ol/layer/Vector.js';
+  import Style from 'https://cdn.jsdelivr.net/npm/ol/style/Style.js';
+  import Icon from 'https://cdn.jsdelivr.net/npm/ol/style/Icon.js';
+  import {fromLonLat} from 'https://cdn.jsdelivr.net/npm/ol/proj.js';
 
-    const museumLonLat = [32.8597, 39.925];
+  const museumLonLat = [32.8597, 39.925];
 
-    const map = new Map({
-      target: 'map',
-      layers: [new TileLayer({source: new OSM()})],
-      view: new View({center: fromLonLat(museumLonLat), zoom: 16}),
-      controls: defaultControls().extend([new FullScreen(), new Zoom()])
-    });
+  const map = new Map({
+    target: 'map',
+    layers: [new TileLayer({source: new OSM()})],
+    view: new View({center: fromLonLat(museumLonLat), zoom: 16}),
+    controls: defaultControls().extend([new FullScreen(), new Zoom()])
+  });
 
-    const marker = new Feature({geometry: new Point(fromLonLat(museumLonLat))});
+  const marker = new Feature({geometry: new Point(fromLonLat(museumLonLat))});
+  const vectorSource = new VectorSource({features: [marker]});
+  const markerLayer = new VectorLayer({
+    source: vectorSource,
+    style: new Style({
+      image: new Icon({src: 'https://cdn-icons-png.flaticon.com/512/684/684908.png', scale: 0.05})
+    })
+  });
 
-    const vectorSource = new VectorSource({features: [marker]});
-
-    const markerLayer = new VectorLayer({
-      source: vectorSource,
-      style: new Style({
-        image: new Icon({src: 'https://cdn-icons-png.flaticon.com/512/684/684908.png', scale: 0.05})
-      })
-    });
-
-    map.addLayer(markerLayer);
-  </script>
+  map.addLayer(markerLayer);
+</script>
 </body>
 </html>
