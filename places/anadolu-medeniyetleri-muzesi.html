@@ -44,16 +44,11 @@
 <script src="https://cdn.jsdelivr.net/npm/ol/ol.js"></script> 
 
 <script>
-    // KESİN ÇÖZÜM: Harita kodunu 'DOMContentLoaded' içine alarak 
-    // OpenLayers kütüphanesinin yüklenmesini bekliyoruz.
+    // HARİTA KODU: Tüm kod, OpenLayers'ın yüklenmesini garanti etmek için 
+    // 'DOMContentLoaded' olay dinleyicisinin içine alınmıştır.
+
     document.addEventListener('DOMContentLoaded', function() {
         
-        // Bu kontrol sadece hata ayıklama amaçlıdır. Normalde sorunsuz çalışmalıdır.
-        if (typeof ol === 'undefined') {
-            console.error("KRİTİK HATA: OpenLayers kütüphanesi hala yüklenemedi. Lütfen ağ bağlantınızı kontrol edin.");
-            return;
-        }
-
         const museumLonLat = [32.8597, 39.925];
 
         const map = new ol.Map({
