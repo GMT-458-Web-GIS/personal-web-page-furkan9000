@@ -50,7 +50,20 @@ header {
   margin: 0 0 10px 0;
 }
 
-/* Lokasyon animasyonu (gif) */
+/* GIF Başlık Altında ve Ortalanmış */
+.center-section .gif-container {
+  width: 50%;           /* Başlık genişliğine göre ayarlayabilirsin */
+  max-width: 400px;     /* Çok büyük ekranlarda sınırlama */
+  margin: 10px auto 0 auto; /* Ortala ve başlıktan boşluk bırak */
+}
+
+.center-section .gif-container img {
+  width: 100%;          /* GIF container ile aynı genişlikte */
+  height: auto;         /* Oran bozulmasın */
+  display: block;
+}
+
+/* Lokasyon animasyonu (eski küçük GIF) */
 .center-section .location-animation {
   width: 60px;
   height: 60px;
