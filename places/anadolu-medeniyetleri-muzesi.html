@@ -4,13 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Anadolu Medeniyetleri Müzesi - Ankara</title>
-
-  <!-- Stil dosyası -->
   <link rel="stylesheet" href="../css/style.css">
-
   <!-- OpenLayers CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol/ol.css">
-
   <style>
     .museum-content {
       margin: 20px;
@@ -106,46 +102,42 @@
   </main>
 
   <!-- OpenLayers JS -->
-  <script type="module">
-    import Map from 'https://cdn.jsdelivr.net/npm/ol/Map.js';
-    import View from 'https://cdn.jsdelivr.net/npm/ol/View.js';
-    import TileLayer from 'https://cdn.jsdelivr.net/npm/ol/layer/Tile.js';
-    import OSM from 'https://cdn.jsdelivr.net/npm/ol/source/OSM.js';
-    import {defaults as defaultControls, FullScreen, Zoom} from 'https://cdn.jsdelivr.net/npm/ol/control.js';
-    import Feature from 'https://cdn.jsdelivr.net/npm/ol/Feature.js';
-    import Point from 'https://cdn.jsdelivr.net/npm/ol/geom/Point.js';
-    import VectorSource from 'https://cdn.jsdelivr.net/npm/ol/source/Vector.js';
-    import VectorLayer from 'https://cdn.jsdelivr.net/npm/ol/layer/Vector.js';
-    import Style from 'https://cdn.jsdelivr.net/npm/ol/style/Style.js';
-    import Icon from 'https://cdn.jsdelivr.net/npm/ol/style/Icon.js';
-    import {fromLonLat} from 'https://cdn.jsdelivr.net/npm/ol/proj.js';
-
+  <script src="https://cdn.jsdelivr.net/npm/ol/ol.js"></script>
+  <script>
+    // Müze koordinatları
     const museumLonLat = [32.8597, 39.925];
 
-    const map = new Map({
+    // OpenLayers harita
+    const map = new ol.Map({
       target: 'map',
       layers: [
-        new TileLayer({ source: new OSM() })
+        new ol.layer.Tile({
+          source: new ol.source.OSM()
+        })
       ],
-      view: new View({
-        center: fromLonLat(museumLonLat),
+      view: new ol.View({
+        center: ol.proj.fromLonLat(museumLonLat),
         zoom: 16
       }),
-      controls: defaultControls().extend([new FullScreen(), new Zoom()])
+      controls: ol.control.defaults().extend([
+        new ol.control.FullScreen(),
+        new ol.control.Zoom()
+      ])
     });
 
-    const marker = new Feature({
-      geometry: new Point(fromLonLat(museumLonLat))
+    // Marker ekleme
+    const marker = new ol.Feature({
+      geometry: new ol.geom.Point(ol.proj.fromLonLat(museumLonLat))
     });
 
-    const vectorSource = new VectorSource({
+    const vectorSource = new ol.source.Vector({
       features: [marker]
     });
 
-    const markerLayer = new VectorLayer({
+    const markerLayer = new ol.layer.Vector({
       source: vectorSource,
-      style: new Style({
-        image: new Icon({
+      style: new ol.style.Style({
+        image: new ol.style.Icon({
           src: 'https://cdn-icons-png.flaticon.com/512/684/684908.png',
           scale: 0.05
         })
