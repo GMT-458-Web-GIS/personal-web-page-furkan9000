@@ -42,46 +42,45 @@
 </main>
 
 <script src="https://cdn.jsdelivr.net/npm/ol/ol.js"></script> 
+
 <script>
-    // Kütüphane yükleme sorununu aşmak için güvenli zamanlama mekanizması kullanıyoruz.
+    // KESİN ÇÖZÜM: Harita kodunu 'DOMContentLoaded' içine alarak 
+    // OpenLayers kütüphanesinin yüklenmesini bekliyoruz.
     document.addEventListener('DOMContentLoaded', function() {
-        // Yapay gecikme (50ms) ekleyerek kütüphanenin tanımlanması için zaman tanıyoruz.
-        setTimeout(function() {
-            if (typeof ol === 'undefined') {
-                console.error("KRİTİK HATA: OpenLayers hala yüklenemedi. Ağ bağlantınızı kontrol edin.");
-                return;
-            }
+        
+        // Bu kontrol sadece hata ayıklama amaçlıdır. Normalde sorunsuz çalışmalıdır.
+        if (typeof ol === 'undefined') {
+            console.error("KRİTİK HATA: OpenLayers kütüphanesi hala yüklenemedi. Lütfen ağ bağlantınızı kontrol edin.");
+            return;
+        }
 
-            const museumLonLat = [32.8597, 39.925];
+        const museumLonLat = [32.8597, 39.925];
 
-            const map = new ol.Map({
-                target: 'map',
-                layers: [
-                    new ol.layer.Tile({ source: new ol.source.OSM() })
-                ],
-                view: new ol.View({
-                    center: ol.proj.fromLonLat(museumLonLat),
-                    zoom: 16
-                }),
-                controls: ol.control.defaults().extend([new ol.control.FullScreen(), new ol.control.Zoom()])
-            });
+        const map = new ol.Map({
+            target: 'map',
+            layers: [
+                new ol.layer.Tile({ source: new ol.source.OSM() })
+            ],
+            view: new ol.View({
+                center: ol.proj.fromLonLat(museumLonLat),
+                zoom: 16
+            }),
+            controls: ol.control.defaults().extend([new ol.control.FullScreen(), new ol.control.Zoom()])
+        });
 
-            const marker = new ol.Feature({ geometry: new ol.geom.Point(ol.proj.fromLonLat(museumLonLat)) });
-            const vectorSource = new ol.source.Vector({ features: [marker] });
-            const markerLayer = new ol.layer.Vector({
-                source: vectorSource,
-                style: new ol.style.Style({
-                    image: new ol.style.Icon({
-                        src: 'https://cdn-icons-png.flaticon.com/512/684/684908.png',
-                        scale: 0.05
-                    })
+        const marker = new ol.Feature({ geometry: new ol.geom.Point(ol.proj.fromLonLat(museumLonLat)) });
+        const vectorSource = new ol.source.Vector({ features: [marker] });
+        const markerLayer = new ol.layer.Vector({
+            source: vectorSource,
+            style: new ol.style.Style({
+                image: new ol.style.Icon({
+                    src: 'https://cdn-icons-png.flaticon.com/512/684/684908.png',
+                    scale: 0.05
                 })
-            });
+            })
+        });
 
-            map.addLayer(markerLayer);
-            
-        }, 50); // 50 milisaniye bekle
-
+        map.addLayer(markerLayer);
     });
 </script>
 </body>
