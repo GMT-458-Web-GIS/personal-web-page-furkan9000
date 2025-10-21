@@ -6,7 +6,7 @@
   <title>Anadolu Medeniyetleri Müzesi - Ankara</title>
   <link rel="stylesheet" href="../css/style.css">
   <!-- ✅ OpenLayers CSS -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@6.15.1/ol.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@7.5.1/ol.css">
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -125,11 +125,13 @@
 
 </main>
 
-<!-- ✅ OpenLayers JS (Doğru versiyon ve sırayla) -->
-<script src="https://cdn.jsdelivr.net/npm/ol@6.15.1/dist/ol.js"></script>
-
+<!-- ✅ OpenLayers JS (uyumlu versiyon) -->
+<script src="https://cdn.jsdelivr.net/npm/ol@7.5.1/dist/ol.js"></script>
 <script>
-  // Harita oluşturma
+  // Müze koordinatları
+  const museumLonLat = [32.8597, 39.925]; // Ankara
+
+  // Harita oluştur
   const map = new ol.Map({
     target: 'map',
     layers: [
@@ -138,18 +140,18 @@
       })
     ],
     view: new ol.View({
-      center: ol.proj.fromLonLat([32.8597, 39.925]),
+      center: ol.proj.fromLonLat(museumLonLat),
       zoom: 17
     })
   });
 
-  // Etiket oluştur (overlay)
+  // Etiket (overlay)
   const labelElement = document.createElement('div');
   labelElement.className = 'ol-label';
   labelElement.innerHTML = 'Anadolu Medeniyetleri Müzesi';
 
   const label = new ol.Overlay({
-    position: ol.proj.fromLonLat([32.8597, 39.925]),
+    position: ol.proj.fromLonLat(museumLonLat),
     positioning: 'bottom-center',
     element: labelElement
   });
