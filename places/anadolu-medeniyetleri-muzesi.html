@@ -41,46 +41,44 @@
   </section>
 </main>
 
-<script src="https://cdn.jsdelivr.net/npm/ol/ol.js" defer></script> 
+<script src="https://cdn.jsdelivr.net/npm/ol/ol.js"></script> 
 <script>
-    // Kütüphane yüklendikten sonra çalışması için harita kodunu bir fonksiyona sarıyoruz
-    // veya sadece defer kullanmak genellikle yeterli olur.
+    // **ÇÖZÜM:** Harita kodunu, sayfa tamamen yüklendiğinde çalışacak bir olayın içine alıyoruz.
+    window.addEventListener('load', function() {
+        // Bu noktada 'ol' objesi GARANTİLİ olarak tanımlanmıştır.
 
-    const museumLonLat = [32.8597, 39.925]; // Müze koordinatları
+        const museumLonLat = [32.8597, 39.925];
 
-    const map = new ol.Map({
-        target: 'map',
-        layers: [
-            // OSM (OpenStreetMap) temel harita katmanı
-            new ol.layer.Tile({ source: new ol.source.OSM() }) 
-        ],
-        view: new ol.View({
-            // Koordinatları EPSG:4326 (LonLat) 'dan haritanın kullandığı EPSG:3857'ye çeviriyoruz
-            center: ol.proj.fromLonLat(museumLonLat), 
-            zoom: 16 // Yakınlaştırma seviyesi
-        }),
-        // Ekstra tam ekran ve zoom kontrolleri ekliyoruz
-        controls: ol.control.defaults().extend([new ol.control.FullScreen(), new ol.control.Zoom()])
-    });
+        const map = new ol.Map({
+            target: 'map',
+            layers: [
+                new ol.layer.Tile({ source: new ol.source.OSM() })
+            ],
+            view: new ol.View({
+                center: ol.proj.fromLonLat(museumLonLat),
+                zoom: 16
+            }),
+            controls: ol.control.defaults().extend([new ol.control.FullScreen(), new ol.control.Zoom()])
+        });
 
-    // Haritaya işaretçi (marker) ekleme
-    const marker = new ol.Feature({ 
-        geometry: new ol.geom.Point(ol.proj.fromLonLat(museumLonLat)) 
-    });
-    
-    const vectorSource = new ol.source.Vector({ features: [marker] });
-    
-    const markerLayer = new ol.layer.Vector({
-        source: vectorSource,
-        style: new ol.style.Style({
-            image: new ol.style.Icon({
-                src: 'https://cdn-icons-png.flaticon.com/512/684/684908.png', // İşaretçi ikonu
-                scale: 0.05 // İkon boyutu
+        const marker = new ol.Feature({ 
+            geometry: new ol.geom.Point(ol.proj.fromLonLat(museumLonLat)) 
+        });
+        
+        const vectorSource = new ol.source.Vector({ features: [marker] });
+        
+        const markerLayer = new ol.layer.Vector({
+            source: vectorSource,
+            style: new ol.style.Style({
+                image: new ol.style.Icon({
+                    src: 'https://cdn-icons-png.flaticon.com/512/684/684908.png',
+                    scale: 0.05
+                })
             })
-        })
-    });
+        });
 
-    map.addLayer(markerLayer); // İşaretçi katmanını haritaya ekle
+        map.addLayer(markerLayer);
+    });
 </script>
 </body>
 </html>
