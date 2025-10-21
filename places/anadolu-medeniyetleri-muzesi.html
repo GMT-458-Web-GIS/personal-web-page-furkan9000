@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Anadolu Medeniyetleri Müzesi - Ankara</title>
   <link rel="stylesheet" href="../css/style.css">
-  <!-- OpenLayers CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol/ol.css">
   <style>
     html, body {
@@ -29,7 +28,7 @@
     }
 
     .museum-images img {
-      width: 80%;  /* Daha büyük */
+      width: 80%;
       max-width: 800px;
       height: auto;
       display: block;
@@ -44,7 +43,7 @@
 
     #map {
       width: 100%;
-      height: 500px; /* Harita yüksekliği */
+      height: 500px;
       margin-top: 20px;
       border-radius: 8px;
     }
@@ -70,6 +69,41 @@
       color: white;
       border: none;
       border-radius: 5px;
+    }
+
+    .ol-popup {
+      position: absolute;
+      background-color: white;
+      padding: 10px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      bottom: 12px;
+      left: -50px;
+      min-width: 180px;
+    }
+
+    .ol-popup:after, .ol-popup:before {
+      top: 100%;
+      border: solid transparent;
+      content: " ";
+      height: 0;
+      width: 0;
+      position: absolute;
+      pointer-events: none;
+    }
+
+    .ol-popup:after {
+      border-top-color: white;
+      border-width: 10px;
+      left: 48px;
+      margin-left: -10px;
+    }
+
+    .ol-popup:before {
+      border-top-color: #ccc;
+      border-width: 11px;
+      left: 48px;
+      margin-left: -11px;
     }
   </style>
 </head>
@@ -110,16 +144,12 @@
   <!-- OpenLayers JS -->
   <script src="https://cdn.jsdelivr.net/npm/ol@latest/dist/ol.js"></script>
   <script>
-    // Müze koordinatları: [boylam, enlem]
     const museumLonLat = [32.8597, 39.925];
 
-    // OpenLayers map
     const map = new ol.Map({
       target: 'map',
       layers: [
-        new ol.layer.Tile({
-          source: new ol.source.OSM()
-        })
+        new ol.layer.Tile({ source: new ol.source.OSM() })
       ],
       view: new ol.View({
         center: ol.proj.fromLonLat(museumLonLat),
@@ -131,14 +161,12 @@
       ])
     });
 
-    // Marker ekleme
+    // Marker
     const marker = new ol.Feature({
       geometry: new ol.geom.Point(ol.proj.fromLonLat(museumLonLat))
     });
 
-    const vectorSource = new ol.source.Vector({
-      features: [marker]
-    });
+    const vectorSource = new ol.source.Vector({ features: [marker] });
 
     const markerLayer = new ol.layer.Vector({
       source: vectorSource,
@@ -149,8 +177,31 @@
         })
       })
     });
-
     map.addLayer(markerLayer);
+
+    // Popup overlay
+    const container = document.createElement('div');
+    container.className = 'ol-popup';
+    container.innerHTML = '<strong>Anadolu Medeniyetleri Müzesi</strong><br>Ankara Kalesi\'nin eteklerinde bulunan müze.';
+    document.body.appendChild(container);
+
+    const overlay = new ol.Overlay({
+      element: container,
+      positioning: 'bottom-center',
+      stopEvent: false,
+      offset: [0, -25]
+    });
+    map.addOverlay(overlay);
+
+    // Marker tıklayınca popup göster
+    map.on('click', function(evt) {
+      const feature = map.forEachFeatureAtPixel(evt.pixel, function(f) { return f; });
+      if (feature === marker) {
+        overlay.setPosition(feature.getGeometry().getCoordinates());
+      } else {
+        overlay.setPosition(undefined); // tıklama başka yere ise gizle
+      }
+    });
   </script>
 </body>
 </html>
