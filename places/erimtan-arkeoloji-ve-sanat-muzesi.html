@@ -1,1 +1,166 @@
- 
+   
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Erimtan Arkeoloji ve Sanat Müzesi - Ankara</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <!-- ✅ OpenLayers CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@7.5.1/ol.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f7f7f7;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #f5f5f5;
+      padding: 15px;
+      border-bottom: 2px solid #000;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 24px;
+    }
+
+    header button {
+      padding: 8px 16px;
+      cursor: pointer;
+      background-color: #000;
+      color: white;
+      border: none;
+      border-radius: 5px;
+    }
+
+    .museum-content {
+      max-width: 900px;
+      margin: 20px auto;
+      padding: 10px 20px;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    }
+
+    .museum-content h2 {
+      margin-top: 20px;
+      margin-bottom: 10px;
+      border-bottom: 2px solid #964B00;
+      padding-bottom: 5px;
+    }
+
+    .museum-content p {
+      line-height: 1.6;
+      margin-bottom: 10px;
+    }
+
+    .museum-images img {
+      width: 80%;
+      max-width: 800px;
+      display: block;
+      margin: 15px auto;
+      border-radius: 8px;
+    }
+
+    .museum-contents ul {
+      list-style: disc;
+      padding-left: 20px;
+    }
+
+    #map {
+      width: 100%;
+      height: 500px;
+      margin-top: 20px;
+      border-radius: 8px;
+    }
+
+    .ol-label {
+      background-color: rgba(255, 255, 255, 0.9);
+      padding: 5px 10px;
+      border-radius: 4px;
+      font-weight: bold;
+      border: 1px solid #444;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Erimtan Arkeoloji ve Sanat Müzesi</h1>
+  <button onclick="window.location.href='../index.html'">🏠 Ana Sayfa</button>
+</header>
+
+<main class="museum-content">
+
+  <section class="museum-description">
+    <h2>Erimtan Arkeoloji ve Sanat Müzesi</h2>
+    <p>Ankara Kalesi yolu üzerinde konumlanan bu özel müze, koleksiyoner Yüksel Erimtan tarafından bağışlanan çoğunluğu Anadolu kökenli yaklaşık iki bin arkeolojik eseri sergiler. Aynı zamanda konser ve çeşitli kültürel etkinliklere ev sahipliği yapan modern bir mimariye sahiptir.</p>
+  </section>
+
+  <section class="museum-contents">
+    <h2>Müze İçindekiler</h2>
+    <ul>
+      <li>Hitit,</li>
+      <li>Urartu,</li>
+      <li>Roma,</li>
+      <li>Bizans Dönemlerine Ait Eserler</li>
+
+    </ul>
+  </section>
+
+  <section class="museum-images">
+    <h2>Fotoğraflar</h2>
+    <img src="../images/erimtan.jpeg" alt="Erimtan Arkeoloji ve Sanat Müzesi">
+  </section>
+
+  <section class="museum-map">
+    <h2>Harita</h2>
+    <div id="map"></div>
+  </section>
+
+</main>
+
+<!-- ✅ OpenLayers JS (uyumlu versiyon) -->
+<script src="https://cdn.jsdelivr.net/npm/ol@7.5.1/dist/ol.js"></script>
+<script>
+  // Müze koordinatları
+  const museumLonLat = [32.8629, 39.9378]; // Ankara
+
+  // Harita oluştur
+  const map = new ol.Map({
+    target: 'map',
+    layers: [
+      new ol.layer.Tile({
+        source: new ol.source.OSM()
+      })
+    ],
+    view: new ol.View({
+      center: ol.proj.fromLonLat(museumLonLat),
+      zoom: 17
+    })
+  });
+
+  // Etiket (overlay)
+  const labelElement = document.createElement('div');
+  labelElement.className = 'ol-label';
+  labelElement.innerHTML = 'Erimtan Arkeoloji ve Sanat Müzesi';
+
+  const label = new ol.Overlay({
+    position: ol.proj.fromLonLat(museumLonLat),
+    positioning: 'bottom-center',
+    element: labelElement
+  });
+
+  map.addOverlay(label);
+</script>
+
+</body>
+</html>
+
+
