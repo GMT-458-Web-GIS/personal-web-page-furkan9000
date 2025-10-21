@@ -19,9 +19,10 @@ header {
 /* Sol kısım (fotoğraf + hakkımda) */
 .left-section {
   display: flex;
-  align-items: flex-start;
-  gap: 15px;
-  max-width: 30%;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  max-width: 200px;
 }
 
 .profile-img {
@@ -33,18 +34,28 @@ header {
 
 .about {
   font-size: 14px;
+  text-align: center;
 }
 
 /* Orta kısım (başlık) */
 .center-section {
   text-align: center;
   flex: 1;
+  position: relative;
 }
 
 .center-section h1 {
   font-size: 36px;
   color: #000;
-  margin: 0;
+  margin: 0 0 10px 0;
+}
+
+/* Lokasyon animasyonu (gif) */
+.center-section .location-animation {
+  width: 60px;
+  height: 60px;
+  display: block;
+  margin: 10px auto 0 auto;
 }
 
 /* Sağ kısım (üyelik/giriş) */
@@ -53,6 +64,7 @@ header {
   padding: 15px;
   border-radius: 8px;
   text-align: center;
+  max-width: 250px;
 }
 
 .login-form {
@@ -148,10 +160,29 @@ footer {
   font-size: 14px;
   margin-top: 30px;
 }
-.location-animation {
-    width: 80px;          /* GIF boyutu */
-    position: fixed;       /* Sayfada sabit */
-    bottom: 100px;         /* Altından boşluk */
-    right: 30px;           /* Sağdan boşluk */
-    z-index: 100;          /* Üstte görünmesi için */
+
+/* Places list sayfası */
+.places-list {
+  list-style: none;
+  padding: 0;
+  margin: 20px auto;
+  max-width: 500px;
+}
+
+.places-list li {
+  margin: 8px 0;
+  background-color: #f0f0f0;
+  padding: 10px;
+  border-radius: 6px;
+  text-align: center;
+}
+
+.places-list li a {
+  text-decoration: none;
+  color: #000;
+  font-weight: bold;
+}
+
+.places-list li a:hover {
+  color: #0077cc;
 }
