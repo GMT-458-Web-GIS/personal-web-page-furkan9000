@@ -1,140 +1,166 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Anadolu Medeniyetleri Müzesi - Ankara</title>
-    <!-- Tailwind CSS Yükleniyor -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Inter Fontu ve Tailwind Konfigürasyonu -->
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f7f9fc;
-        }
-    </style>
-    <!-- OpenLayers CSS Yükleniyor -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol/ol.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anadolu Medeniyetleri Müzesi - Ankara</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <!-- OpenLayers CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol/ol.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f7f7f7;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #f5f5f5;
+      padding: 15px;
+      border-bottom: 2px solid #000;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 24px;
+    }
+
+    header button {
+      padding: 8px 16px;
+      cursor: pointer;
+      background-color: #000;
+      color: white;
+      border: none;
+      border-radius: 5px;
+    }
+
+    .museum-content {
+      max-width: 900px;
+      margin: 20px auto;
+      padding: 10px 20px;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    }
+
+    .museum-content h2 {
+      margin-top: 20px;
+      margin-bottom: 10px;
+      border-bottom: 2px solid #964B00;
+      padding-bottom: 5px;
+    }
+
+    .museum-content p {
+      line-height: 1.6;
+      margin-bottom: 10px;
+    }
+
+    .museum-images img {
+      width: 80%;
+      max-width: 800px;
+      display: block;
+      margin: 15px auto;
+      border-radius: 8px;
+    }
+
+    .museum-contents ul {
+      list-style: disc;
+      padding-left: 20px;
+    }
+
+    #map {
+      width: 100%;
+      height: 500px;
+      margin-top: 20px;
+      border-radius: 8px;
+    }
+  </style>
 </head>
-<body class="min-h-screen antialiased">
+<body>
 
-    <!-- Ana İçerik Konteyneri -->
-    <div class="max-w-4xl mx-auto p-4 md:p-8 space-y-12">
+<header>
+  <h1>Anadolu Medeniyetleri Müzesi</h1>
+  <button onclick="window.location.href='../index.html'">🏠 Ana Sayfa</button>
+</header>
 
-        <!-- Başlık Bölümü -->
-        <header class="text-center pt-8 pb-4 border-b border-gray-200">
-            <h1 class="4xl md:text-5xl font-extrabold text-[#964B00] tracking-tight">
-                Anadolu Medeniyetleri Müzesi
-            </h1>
-            <p class="mt-2 text-lg text-gray-500">Ankara Kalesi'nin eteklerinde, tarihin kalbi</p>
-        </header>
+<main class="museum-content">
 
-        <!-- Tarihi Hakkında Bölümü -->
-        <section class="bg-white p-6 rounded-xl shadow-lg">
-            <h2 class="text-3xl font-bold text-gray-800 mb-4 border-b pb-2">Kısa Tarihçe</h2>
-            <p class="text-gray-700 leading-relaxed">
-                Anadolu Medeniyetleri Müzesi, Ankara'nın en önemli kültürel miraslarından biridir. Yapıları, **Osmanlı Dönemi'nde** inşa edilen Kurşunlu Han ve Mahmut Paşa Bedesteni'nin restorasyonu ile hayat bulmuştur. Müzenin kuruluşu, **Mustafa Kemal Atatürk'ün** isteği üzerine başlamış, Hititlerden kalma eserleri toplayıp sergileme vizyonuyla şekillenmiştir. Müze, Paleolitik Çağ'dan başlayarak Frig, Urartu, Hitit ve Lidya gibi Anadolu'da hüküm sürmüş medeniyetlerin kronolojik sırasına göre düzenlenmiş **eşsiz bir koleksiyona** ev sahipliği yapar. 
-            </p>
-        </section>
+  <section class="museum-description">
+    <h2>Müze Hakkında</h2>
+    <p>Anadolu Medeniyetleri Müzesi: Ankara Kalesi'nin eteklerinde bulunan bu müze, Neolitik Çağ'dan başlayarak Hitit, Frig, Urartu ve diğer Anadolu medeniyetlerine ait eşsiz eserleri barındırır. Dünyanın en iyi müzeleri arasında gösterilen koleksiyonu, Hattilere ait güneş kursları, Hitit tabletleri ve Frig Kralı Midas'ın mezarından çıkan objeler gibi benzersiz parçaları içerir.</p>
+  </section>
 
-        <!-- Müze İçindekiler Bölümü -->
-        <section class="bg-white p-6 rounded-xl shadow-lg">
-            <h2 class="text-3xl font-bold text-gray-800 mb-4 border-b pb-2">Müze İçindekiler</h2>
-            <ul class="space-y-2 text-gray-700 list-disc list-inside">
-                <li class="font-medium text-lg">Paleolitik, Neolitik ve Kalkolitik Çağ Buluntuları</li>
-                <li class="font-medium text-lg text-[#A95A00]">Asur Ticaret Kolonileri Çağı Eserleri (Kültepe, Kaniş)</li>
-                <li class="font-medium text-lg">Hitit Uygarlığı Eserleri (Başkent Hattuşaş'tan)</li>
-                <li class="font-medium text-lg">Frig Krallığı Buluntuları (Gordion, Kral Midas)</li>
-                <li class="font-medium text-lg">Urartu Uygarlığı Koleksiyonu</li>
-                <li class="font-medium text-lg">Lidya ve Geç Dönem Anadolu Medeniyetleri</li>
-            </ul>
-        </section>
+  <section class="museum-contents">
+    <h2>Müze İçindekiler</h2>
+    <ul>
+      <li>Paleolitik Çağ Eserleri</li>
+      <li>Neolitik Çağ Eserleri</li>
+      <li>Hitit Dönemi Eserleri</li>
+      <li>Frig Dönemi Eserleri</li>
+      <li>Roma ve Bizans Dönemi Eserleri</li>
+    </ul>
+  </section>
 
-        <!-- Resim Bölümü -->
-        <section class="text-center">
-            <h2 class="text-3xl font-bold text-gray-800 mb-4 border-b pb-2">Müzeden Bir Görünüm</h2>
-            <!-- Ankara Kalesi'nin eteklerindeki müzenin bir görüntüsü için placeholder kullanılıyor -->
-            <img 
-                src="https://placehold.co/800x450/A95A00/ffffff?text=Anadolu+Medeniyetleri+M%C3%BCzesi" 
-                alt="Anadolu Medeniyetleri Müzesi binası" 
-                class="w-full rounded-xl shadow-2xl object-cover transition duration-300 hover:scale-[1.01]"
-                onerror="this.src='https://placehold.co/800x450/A95A00/ffffff?text=Resim+Y%C3%BCklenemedi'"
-            >
-            <p class="mt-3 text-sm text-gray-500">Müze, tarihi Kurşunlu Han ve Mahmut Paşa Bedesteni yapılarında yer almaktadır.</p>
-        </section>
+  <section class="museum-images">
+    <h2>Fotoğraflar</h2>
+    <img src="../images/anadolu_medeniyetler_müzesi.jpg" alt="Müze 1">
+  </section>
 
-        <!-- Harita Bölümü -->
-        <section class="pb-12">
-            <h2 class="text-3xl font-bold text-gray-800 mb-4 border-b pb-2">Konum Haritası</h2>
-            <!-- Haritanın yükleneceği div -->
-            <div id="map" class="w-full rounded-xl shadow-2xl border-2 border-gray-200" style="height: 500px;"></div>
-        </section>
+  <section class="museum-map">
+    <h2>Harita</h2>
+    <div id="map"></div>
+  </section>
 
-    </div>
+</main>
 
-    <!-- OpenLayers Kütüphanesi -->
-    <script src="https://cdn.jsdelivr.net/npm/ol/ol.js"></script> 
+<!-- OpenLayers JS -->
+<script src="https://cdn.jsdelivr.net/npm/ol/ol.js"></script>
+<script>
+  window.addEventListener('load', () => {
 
-    <!-- Harita Başlatma Kodu -->
-    <script>
-    // KRİTİK DÜZELTME: Kütüphane yüklenmesi garanti edilemediği için,
-    // tüm kaynaklar yüklendikten sonra (load) yapay bir gecikme (setTimeout) ekleniyor.
-    window.addEventListener('load', () => {
+    // Müze koordinatları
+    const museumLonLat = [32.8597, 39.925]; 
 
-        setTimeout(() => {
-            // Güvenlik kontrolü
-            if (typeof ol === 'undefined') {
-                console.error("KRİTİK HATA: OpenLayers kütüphanesi hala tanımlanamıyor. Ağ bağlantınızı veya güvenlik kısıtlamalarını kontrol edin.");
-                return;
-            }
-
-            // Müze Koordinatları (Ankara, Altındağ)
-            const MUSEUM_LON_LAT = [32.8601, 39.9405];
-            const MARKER_ICON_URL = 'https://cdn-icons-png.flaticon.com/512/684/684908.png';
-            
-            // 1. Haritayı Oluşturma
-            const map = new ol.Map({
-                target: 'map',
-                layers: [
-                    new ol.layer.Tile({ 
-                        source: new ol.source.OSM() 
-                    })
-                ],
-                view: new ol.View({
-                    // Koordinatları dönüştürerek haritanın merkezini belirliyoruz
-                    center: ol.proj.fromLonLat(MUSEUM_LON_LAT),
-                    zoom: 17 // Detaylı yakınlaştırma seviyesi
-                }),
-                controls: ol.control.defaults().extend([
-                    new ol.control.FullScreen(), 
-                    new ol.control.Zoom()
-                ])
-            });
-
-            // 2. İşaretçiyi (Marker) Oluşturma
-            const museumMarker = new ol.Feature({ 
-                geometry: new ol.geom.Point(ol.proj.fromLonLat(MUSEUM_LON_LAT)) 
-            });
-
-            // İşaretçi stilini tanımlama
-            const markerStyle = new ol.style.Style({
-                image: new ol.style.Icon({
-                    src: MARKER_ICON_URL,
-                    scale: 0.05
-                })
-            });
-
-            // İşaretçi katmanını oluşturma ve haritaya ekleme
-            const vectorSource = new ol.source.Vector({ features: [museumMarker] });
-            const markerLayer = new ol.layer.Vector({
-                source: vectorSource,
-                style: markerStyle
-            });
-
-            map.addLayer(markerLayer);
-        }, 50); // 50ms gecikme
+    // Haritayı oluştur
+    const map = new ol.Map({
+      target: 'map',
+      layers: [
+        new ol.layer.Tile({
+          source: new ol.source.OSM()
+        })
+      ],
+      view: new ol.View({
+        center: ol.proj.fromLonLat(museumLonLat),
+        zoom: 17
+      }),
+      controls: ol.control.defaults().extend([
+        new ol.control.FullScreen(),
+        new ol.control.Zoom()
+      ])
     });
-    </script>
+
+    // Marker ekle
+    const marker = new ol.Feature({
+      geometry: new ol.geom.Point(ol.proj.fromLonLat(museumLonLat))
+    });
+
+    const markerLayer = new ol.layer.Vector({
+      source: new ol.source.Vector({features: [marker]}),
+      style: new ol.style.Style({
+        image: new ol.style.Icon({
+          src: 'https://cdn-icons-png.flaticon.com/512/684/684908.png',
+          scale: 0.05
+        })
+      })
+    });
+
+    map.addLayer(markerLayer);
+  });
+</script>
+
 </body>
 </html>
