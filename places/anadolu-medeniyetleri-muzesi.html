@@ -125,39 +125,104 @@
 
 </main>
 
-<!-- ✅ OpenLayers JS (uyumlu versiyon) -->
-<script src="https://cdn.jsdelivr.net/npm/ol@7.5.1/dist/ol.js"></script>
-<script>
-  // Müze koordinatları
-  const museumLonLat = [32.8597, 39.925]; // Ankara
+ <!-- ✅ OpenLayers CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@6.15.1/ol.css">
 
-  // Harita oluştur
-  const map = new ol.Map({
-    target: 'map',
-    layers: [
-      new ol.layer.Tile({
-        source: new ol.source.OSM()
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+      background-color: #f2f2f2;
+    }
+
+    h1 {
+      background-color: #5c4033;
+      color: white;
+      padding: 20px;
+      margin: 0;
+    }
+
+    .content {
+      padding: 20px;
+      max-width: 800px;
+      margin: auto;
+    }
+
+    img {
+      width: 80%;
+      border-radius: 10px;
+      margin-top: 20px;
+    }
+
+    #map {
+      width: 100%;
+      height: 500px;
+      margin-top: 30px;
+      border: 2px solid #5c4033;
+    }
+
+    .ol-label {
+      background-color: rgba(255, 255, 255, 0.8);
+      padding: 5px 10px;
+      border-radius: 4px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Anadolu Medeniyetleri Müzesi</h1>
+
+  <div class="content">
+    <p>
+      Ankara’nın tarihi Ulus semtinde yer alan Anadolu Medeniyetleri Müzesi, 
+      Türkiye’nin en önemli arkeolojik koleksiyonlarına ev sahipliği yapmaktadır.
+      Paleolitik Çağ’dan Roma dönemine kadar uzanan geniş bir tarih yelpazesi sunar.
+    </p>
+
+    <p>
+      Müze, 1921 yılında kurulan ilk ulusal müzelerden biri olarak, 
+      Anadolu’nun binlerce yıllık medeniyetlerine ışık tutmaktadır.
+    </p>
+
+    <img src="https://muze.gov.tr/Content/images/muzeler/anadolu_medeniyetleri_muzesi.jpg" alt="Anadolu Medeniyetleri Müzesi">
+  </div>
+
+  <div id="map"></div>
+
+  <!-- ✅ OpenLayers JS (Doğru sırayla, 6.15.1 sürümü) -->
+  <script src="https://cdn.jsdelivr.net/npm/ol@6.15.1/dist/ol.js"></script>
+
+  <script>
+    // Haritayı oluştur
+    const map = new ol.Map({
+      target: 'map',
+      layers: [
+        new ol.layer.Tile({
+          source: new ol.source.OSM()
+        })
+      ],
+      view: new ol.View({
+        center: ol.proj.fromLonLat([32.8597, 39.9334]), // Ankara koordinatları
+        zoom: 17
       })
-    ],
-    view: new ol.View({
-      center: ol.proj.fromLonLat(museumLonLat),
-      zoom: 17
-    })
-  });
+    });
 
-  // Etiket (overlay)
-  const labelElement = document.createElement('div');
-  labelElement.className = 'ol-label';
-  labelElement.innerHTML = 'Anadolu Medeniyetleri Müzesi';
+    // Etiket oluştur (Müze konumu)
+    const labelElement = document.createElement('div');
+    labelElement.className = 'ol-label';
+    labelElement.innerHTML = 'Anadolu Medeniyetleri Müzesi';
 
-  const label = new ol.Overlay({
-    position: ol.proj.fromLonLat(museumLonLat),
-    positioning: 'bottom-center',
-    element: labelElement
-  });
+    const label = new ol.Overlay({
+      position: ol.proj.fromLonLat([32.8597, 39.9334]),
+      positioning: 'bottom-center',
+      element: labelElement
+    });
 
-  map.addOverlay(label);
-</script>
+    map.addOverlay(label);
+  </script>
 
 </body>
 </html>
