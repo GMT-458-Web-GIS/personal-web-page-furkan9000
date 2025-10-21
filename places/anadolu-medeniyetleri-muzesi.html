@@ -1,1 +1,106 @@
- 
+ <!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anadolu Medeniyetleri Müzesi - Ankara</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <!-- OpenLayers CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol/ol.css">
+  <style>
+    .museum-content {
+      margin: 20px;
+    }
+
+    .museum-content h1 {
+      text-align: center;
+      color: #000;
+    }
+
+    .museum-content p {
+      margin: 10px 0;
+      line-height: 1.6;
+    }
+
+    .museum-images img {
+      width: 300px;
+      height: auto;
+      margin: 10px;
+      border-radius: 8px;
+    }
+
+    #map {
+      width: 100%;
+      height: 400px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Anadolu Medeniyetleri Müzesi</h1>
+  </header>
+
+  <main class="museum-content">
+    <section class="museum-description">
+      <h2>Müze Hakkında</h2>
+      <p>Anadolu Medeniyetleri Müzesi: Ankara Kalesi'nin eteklerinde bulunan bu müze, Neolitik Çağ'dan başlayarak Hitit, Frig, Urartu ve diğer Anadolu medeniyetlerine ait eşsiz eserleri barındırır. Dünyanın en iyi müzeleri arasında gösterilen koleksiyonu, Hattilere ait güneş kursları, Hitit tabletleri ve Frig Kralı Midas'ın mezarından çıkan objeler gibi benzersiz parçaları içerir.</p>
+    </section>
+
+    <section class="museum-contents">
+      <h2>Müze İçindekiler</h2>
+      <ul>
+        <li>Paleolitik Çağ Eserleri</li>
+        <li>Neolitik Çağ Eserleri</li>
+        <li>Hitit Dönemi Eserleri</li>
+        <li>Frig Dönemi Eserleri</li>
+        <li>Roma ve Bizans Dönemi Eserleri</li>
+      </ul>
+    </section>
+
+    <section class="museum-images">
+      <h2>Fotoğraflar</h2>
+      <img src="../images/anadolu_medeniyetler_müzesi.jpg" alt="Müze 1">
+        </section>
+
+    <section class="museum-map">
+      <h2>Harita</h2>
+      <div id="map"></div>
+    </section>
+  </main>
+
+  <!-- OpenLayers JS -->
+  <script src="https://cdn.jsdelivr.net/npm/ol/ol.js"></script>
+  <script>
+    // OpenLayers harita kodu
+    const map = new ol.Map({
+      target: 'map',
+      layers: [
+        new ol.layer.Tile({
+          source: new ol.source.OSM()
+        })
+      ],
+      view: new ol.View({
+        center: ol.proj.fromLonLat([32.8597, 39.925]), // Anadolu Medeniyetleri Müzesi koordinatları
+        zoom: 16
+      })
+    });
+
+    // Müze konumunu gösteren marker
+    const marker = new ol.Feature({
+      geometry: new ol.geom.Point(ol.proj.fromLonLat([32.8597, 39.925]))
+    });
+
+    const vectorSource = new ol.source.Vector({
+      features: [marker]
+    });
+
+    const markerVectorLayer = new ol.layer.Vector({
+      source: vectorSource
+    });
+
+    map.addLayer(markerVectorLayer);
+  </script>
+</body>
+</html>
+

@@ -58,7 +58,7 @@ header {
 }
 
 .center-section .gif-container img {
-  width: 100%;          /* GIF container ile aynı genişlikte */
+  width: 60%;          /* GIF container ile aynı genişlikte */
   height: auto;         /* Oran bozulmasın */
   display: block;
 }
