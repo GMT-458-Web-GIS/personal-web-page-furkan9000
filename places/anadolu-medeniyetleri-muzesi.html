@@ -7,104 +7,15 @@
   <link rel="stylesheet" href="../css/style.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol/ol.css">
   <style>
-    html, body {
-      height: 100%;
-      margin: 0;
-      padding: 0;
-    }
-
-    .museum-content {
-      margin: 20px;
-    }
-
-    .museum-content h1 {
-      text-align: center;
-      color: #000;
-    }
-
-    .museum-content p {
-      margin: 10px 0;
-      line-height: 1.6;
-    }
-
-    .museum-images img {
-      width: 80%;
-      max-width: 800px;
-      height: auto;
-      display: block;
-      margin: 10px auto;
-      border-radius: 8px;
-    }
-
-    .museum-contents ul {
-      list-style: disc;
-      padding-left: 20px;
-    }
-
-    #map {
-      width: 100%;
-      height: 500px;
-      margin-top: 20px;
-      border-radius: 8px;
-    }
-
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background-color: #f5f5f5;
-      padding: 15px;
-      border-bottom: 2px solid #000;
-    }
-
-    header h1 {
-      margin: 0;
-      font-size: 24px;
-    }
-
-    header button {
-      padding: 8px 16px;
-      cursor: pointer;
-      background-color: #000;
-      color: white;
-      border: none;
-      border-radius: 5px;
-    }
-
-    .ol-popup {
-      position: absolute;
-      background-color: white;
-      padding: 10px;
-      border-radius: 6px;
-      border: 1px solid #ccc;
-      bottom: 12px;
-      left: -50px;
-      min-width: 180px;
-    }
-
-    .ol-popup:after, .ol-popup:before {
-      top: 100%;
-      border: solid transparent;
-      content: " ";
-      height: 0;
-      width: 0;
-      position: absolute;
-      pointer-events: none;
-    }
-
-    .ol-popup:after {
-      border-top-color: white;
-      border-width: 10px;
-      left: 48px;
-      margin-left: -10px;
-    }
-
-    .ol-popup:before {
-      border-top-color: #ccc;
-      border-width: 11px;
-      left: 48px;
-      margin-left: -11px;
-    }
+    .museum-content { margin: 20px; }
+    .museum-content h1 { text-align: center; color: #000; }
+    .museum-content p { margin: 10px 0; line-height: 1.6; }
+    .museum-images img { width: 80%; max-width: 800px; height: auto; display: block; margin: 10px auto; border-radius: 8px; }
+    #map { width: 100%; height: 500px; margin-top: 20px; border-radius: 8px; }
+    .museum-contents ul { list-style: disc; padding-left: 20px; }
+    header { display: flex; justify-content: space-between; align-items: center; background-color: #f5f5f5; padding: 15px; border-bottom: 2px solid #000; }
+    header h1 { margin: 0; font-size: 24px; }
+    header button { padding: 8px 16px; cursor: pointer; background-color: #000; color: white; border: none; border-radius: 5px; }
   </style>
 </head>
 <body>
@@ -141,67 +52,43 @@
     </section>
   </main>
 
-  <!-- OpenLayers JS -->
-  <script src="https://cdn.jsdelivr.net/npm/ol@latest/dist/ol.js"></script>
-  <script>
+  <!-- OpenLayers ES Module Script -->
+  <script type="module">
+    import 'https://cdn.jsdelivr.net/npm/ol/ol.css';
+    import Map from 'https://cdn.jsdelivr.net/npm/ol/Map.js';
+    import View from 'https://cdn.jsdelivr.net/npm/ol/View.js';
+    import TileLayer from 'https://cdn.jsdelivr.net/npm/ol/layer/Tile.js';
+    import OSM from 'https://cdn.jsdelivr.net/npm/ol/source/OSM.js';
+    import {defaults as defaultControls, FullScreen, Zoom} from 'https://cdn.jsdelivr.net/npm/ol/control.js';
+    import Feature from 'https://cdn.jsdelivr.net/npm/ol/Feature.js';
+    import Point from 'https://cdn.jsdelivr.net/npm/ol/geom/Point.js';
+    import VectorSource from 'https://cdn.jsdelivr.net/npm/ol/source/Vector.js';
+    import VectorLayer from 'https://cdn.jsdelivr.net/npm/ol/layer/Vector.js';
+    import Style from 'https://cdn.jsdelivr.net/npm/ol/style/Style.js';
+    import Icon from 'https://cdn.jsdelivr.net/npm/ol/style/Icon.js';
+    import {fromLonLat} from 'https://cdn.jsdelivr.net/npm/ol/proj.js';
+
     const museumLonLat = [32.8597, 39.925];
 
-    const map = new ol.Map({
+    const map = new Map({
       target: 'map',
-      layers: [
-        new ol.layer.Tile({ source: new ol.source.OSM() })
-      ],
-      view: new ol.View({
-        center: ol.proj.fromLonLat(museumLonLat),
-        zoom: 16
-      }),
-      controls: ol.control.defaults().extend([
-        new ol.control.Zoom(),
-        new ol.control.FullScreen()
-      ])
+      layers: [new TileLayer({source: new OSM()})],
+      view: new View({center: fromLonLat(museumLonLat), zoom: 16}),
+      controls: defaultControls().extend([new FullScreen(), new Zoom()])
     });
 
-    // Marker
-    const marker = new ol.Feature({
-      geometry: new ol.geom.Point(ol.proj.fromLonLat(museumLonLat))
-    });
+    const marker = new Feature({geometry: new Point(fromLonLat(museumLonLat))});
 
-    const vectorSource = new ol.source.Vector({ features: [marker] });
+    const vectorSource = new VectorSource({features: [marker]});
 
-    const markerLayer = new ol.layer.Vector({
+    const markerLayer = new VectorLayer({
       source: vectorSource,
-      style: new ol.style.Style({
-        image: new ol.style.Icon({
-          src: 'https://cdn-icons-png.flaticon.com/512/684/684908.png',
-          scale: 0.05
-        })
+      style: new Style({
+        image: new Icon({src: 'https://cdn-icons-png.flaticon.com/512/684/684908.png', scale: 0.05})
       })
     });
+
     map.addLayer(markerLayer);
-
-    // Popup overlay
-    const container = document.createElement('div');
-    container.className = 'ol-popup';
-    container.innerHTML = '<strong>Anadolu Medeniyetleri Müzesi</strong><br>Ankara Kalesi\'nin eteklerinde bulunan müze.';
-    document.body.appendChild(container);
-
-    const overlay = new ol.Overlay({
-      element: container,
-      positioning: 'bottom-center',
-      stopEvent: false,
-      offset: [0, -25]
-    });
-    map.addOverlay(overlay);
-
-    // Marker tıklayınca popup göster
-    map.on('click', function(evt) {
-      const feature = map.forEachFeatureAtPixel(evt.pixel, function(f) { return f; });
-      if (feature === marker) {
-        overlay.setPosition(feature.getGeometry().getCoordinates());
-      } else {
-        overlay.setPosition(undefined); // tıklama başka yere ise gizle
-      }
-    });
   </script>
 </body>
 </html>
