@@ -1,0 +1,157 @@
+/* Genel yapı */
+body {
+  margin: 0;
+  font-family: "Segoe UI", Arial, sans-serif;
+  background-color: #d9d9d9; /* Mat gri */
+  color: #000;
+}
+
+/* Üst kısım */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 20px;
+  background-color: #f5f5f5;
+  border-bottom: 3px solid #000;
+}
+
+/* Sol kısım (fotoğraf + hakkımda) */
+.left-section {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+  max-width: 30%;
+}
+
+.profile-img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.about {
+  font-size: 14px;
+}
+
+/* Orta kısım (başlık) */
+.center-section {
+  text-align: center;
+  flex: 1;
+}
+
+.center-section h1 {
+  font-size: 36px;
+  color: #000;
+  margin: 0;
+}
+
+/* Sağ kısım (üyelik/giriş) */
+.right-section {
+  background-color: #f0f0f0;
+  padding: 15px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.login-form input {
+  padding: 6px;
+  border: 1px solid #aaa;
+  border-radius: 4px;
+}
+
+.login-form button {
+  background-color: #000;
+  color: white;
+  border: none;
+  padding: 6px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.register-text a {
+  color: #000;
+  text-decoration: underline;
+}
+
+/* Places butonu */
+.main-nav {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.main-nav button {
+  padding: 10px 25px;
+  background-color: #000;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.main-nav button:hover {
+  background-color: #333;
+}
+
+/* Sohbet / Yorum Alanı */
+.chat-section {
+  margin: 20px;
+  background-color: #f7f7f7;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.chat-section h2 {
+  margin-bottom: 10px;
+}
+
+.comments p {
+  background-color: #ececec;
+  padding: 8px;
+  border-radius: 6px;
+  margin: 5px 0;
+}
+
+.comment-form textarea {
+  width: 100%;
+  height: 60px;
+  margin-top: 10px;
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #aaa;
+}
+
+.comment-form button {
+  margin-top: 10px;
+  background-color: #000;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* Footer */
+footer {
+  background-color: #000;
+  color: white;
+  text-align: center;
+  padding: 15px;
+  font-size: 14px;
+  margin-top: 30px;
+}
+.location-animation {
+    width: 80px;          /* GIF boyutu */
+    position: fixed;       /* Sayfada sabit */
+    bottom: 100px;         /* Altından boşluk */
+    right: 30px;           /* Sağdan boşluk */
+    z-index: 100;          /* Üstte görünmesi için */
+}

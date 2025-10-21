@@ -1,1 +1,65 @@
- 
+ <!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ankara Rehberi - Furkan Ateş</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- Üst kısım -->
+  <header>
+    <div class="left-section">
+      <img src="images/furkan.jpg" alt="Furkan Ateş" class="profile-img">
+      <div class="about">
+        <h3>Furkan Ateş</h3>
+        <p>Merhaba, ben Furkan Ateş. Ankara'da Hacettepe Üniversitesi harita mühendisliği bölümü öğrencisiyim. Bu sitenin misyonu Ankara’daki önemli tarihi ve kültürel yerleri paylaşmaktır. Bu site hala geliştirme aşamasındadır ve ilerliyen zamanlarda Ankara içinde bulunan bütün gezilip görülebilecek yerler eklenicektir.</p>
+      </div>
+    </div>
+
+    <div class="center-section">
+      <h1>ANKARA REHBERİ</h1>
+    </div>
+
+    <div class="right-section">
+      <h3>Üye Girişi</h3>
+      <form class="login-form">
+        <input type="text" placeholder="Kullanıcı adı" required>
+        <input type="password" placeholder="Şifre" required>
+        <button type="submit">Giriş</button>
+      </form>
+      <p class="register-text">Hesabın yok mu? <a href="#">Kayıt ol</a></p>
+    </div>
+  </header>
+
+  <!-- Places butonu -->
+  <nav class="main-nav">
+    <button onclick="window.location.href='places.html'">📍 Yerleri Gör</button>
+  </nav>
+
+  <!-- Sohbet / Yorum Alanı -->
+  <section class="chat-section">
+    <h2>💬 Sohbet ve Yorumlar</h2>
+    <div class="comments">
+      <p><strong>Ali:</strong> Harita kısmını çok beğendim!</p>
+      <p><strong>Ayşe:</strong> Ankara Kalesi sayfası harika olmuş 👏</p>
+    </div>
+    <form class="comment-form">
+      <textarea placeholder="Yorumunuzu yazın..."></textarea>
+      <button type="submit">Gönder</button>
+    </form>
+  </section>
+  
+<!-- Dünya Lokasyon İmleci -->
+<div class="location-animation">
+    <img src="images/earth.gif" alt="Dünya Lokasyon İmleci">
+</div>
+
+
+  <!-- Alt bilgi -->
+  <footer>
+    <p>&copy; 2025 Furkan Ateş | Tüm hakları saklıdır.</p>
+  </footer>
+</body>
+</html>
+
