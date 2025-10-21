@@ -5,13 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Anadolu Medeniyetleri Müzesi - Ankara</title>
   <link rel="stylesheet" href="../css/style.css">
-
-  <!-- ✅ OpenLayers CSS (doğru sürüm) -->
-  <link
-    rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/ol@latest/ol.css"
-  />
-
+  <!-- ✅ OpenLayers CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@7.5.1/ol.css">
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -49,13 +44,13 @@
       padding: 10px 20px;
       background-color: #fff;
       border-radius: 10px;
-      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
     }
 
     .museum-content h2 {
       margin-top: 20px;
       margin-bottom: 10px;
-      border-bottom: 2px solid #964b00;
+      border-bottom: 2px solid #964B00;
       padding-bottom: 5px;
     }
 
@@ -94,73 +89,75 @@
   </style>
 </head>
 <body>
-  <header>
-    <h1>Anadolu Medeniyetleri Müzesi</h1>
-    <button onclick="window.location.href='../index.html'">🏠 Ana Sayfa</button>
-  </header>
 
-  <main class="museum-content">
-    <section class="museum-description">
-      <h2>Müze Hakkında</h2>
-      <p>
-        Anadolu Medeniyetleri Müzesi, Ankara Kalesi'nin eteklerinde yer alır ve
-        Neolitik Çağ'dan Roma dönemine kadar birçok uygarlığın izlerini
-        barındırır. Müze, Hattilere ait güneş kursları, Hitit tabletleri, Frig
-        Kralı Midas'ın mezarından çıkan objeler gibi paha biçilemez eserlerle
-        tanınır.
-      </p>
-    </section>
+<header>
+  <h1>Anadolu Medeniyetleri Müzesi</h1>
+  <button onclick="window.location.href='../index.html'">🏠 Ana Sayfa</button>
+</header>
 
-    <section class="museum-contents">
-      <h2>Müze İçindekiler</h2>
-      <ul>
-        <li>Paleolitik Çağ Eserleri</li>
-        <li>Neolitik Çağ Eserleri</li>
-        <li>Hitit Dönemi Eserleri</li>
-        <li>Frig Dönemi Eserleri</li>
-        <li>Roma ve Bizans Dönemi Eserleri</li>
-      </ul>
-    </section>
+<main class="museum-content">
 
-    <section class="museum-images">
-      <h2>Fotoğraflar</h2>
-      <img
-        src="../images/anadolu_medeniyetler_müzesi.jpg"
-        alt="Anadolu Medeniyetleri Müzesi"
-      />
-    </section>
+  <section class="museum-description">
+    <h2>Müze Hakkında</h2>
+    <p>Anadolu Medeniyetleri Müzesi, Ankara Kalesi'nin eteklerinde yer alır ve Neolitik Çağ'dan Roma dönemine kadar birçok uygarlığın izlerini barındırır. Müze, Hattilere ait güneş kursları, Hitit tabletleri, Frig Kralı Midas'ın mezarından çıkan objeler gibi paha biçilemez eserlerle tanınır.</p>
+  </section>
 
-    <section class="museum-map">
-      <h2>Harita</h2>
-      <div id="map"></div>
-    </section>
-  </main>
+  <section class="museum-contents">
+    <h2>Müze İçindekiler</h2>
+    <ul>
+      <li>Paleolitik Çağ Eserleri</li>
+      <li>Neolitik Çağ Eserleri</li>
+      <li>Hitit Dönemi Eserleri</li>
+      <li>Frig Dönemi Eserleri</li>
+      <li>Roma ve Bizans Dönemi Eserleri</li>
+    </ul>
+  </section>
 
-  <!-- ✅ OpenLayers JS dosyasını doğru sırayla yükle -->
-  <script
-    src="https://cdn.jsdelivr.net/npm/ol@latest/dist/ol.js"
-    onload="initMap()"
-  ></script>
+  <section class="museum-images">
+    <h2>Fotoğraflar</h2>
+    <img src="../images/anadolu_medeniyetler_müzesi.jpg" alt="Anadolu Medeniyetleri Müzesi">
+  </section>
 
-  <!-- ✅ Harita kodu -->
-  <script>
-    function initMap() {
-      const museumLonLat = [32.8597, 39.925];
+  <section class="museum-map">
+    <h2>Harita</h2>
+    <div id="map"></div>
+  </section>
 
-      const map = new ol.Map({
-        target: "map",
-        layers: [
-          new ol.layer.Tile({
-            source: new ol.source.OSM(),
-          }),
-        ],
-        view: new ol.View({
-          center: ol.proj.fromLonLat(museumLonLat),
-          zoom: 17,
-        }),
-      });
+</main>
 
-      // Etiket
-      const labelElement = document.createElement("div");
-      labelElement.className = "ol-label";
-      labelElement.innerHTML = "Anadolu Medeniy
+<!-- ✅ OpenLayers JS (uyumlu versiyon) -->
+<script src="https://cdn.jsdelivr.net/npm/ol@7.5.1/dist/ol.js"></script>
+<script>
+  // Müze koordinatları
+  const museumLonLat = [32.8597, 39.925]; // Ankara
+
+  // Harita oluştur
+  const map = new ol.Map({
+    target: 'map',
+    layers: [
+      new ol.layer.Tile({
+        source: new ol.source.OSM()
+      })
+    ],
+    view: new ol.View({
+      center: ol.proj.fromLonLat(museumLonLat),
+      zoom: 17
+    })
+  });
+
+  // Etiket (overlay)
+  const labelElement = document.createElement('div');
+  labelElement.className = 'ol-label';
+  labelElement.innerHTML = 'Anadolu Medeniyetleri Müzesi';
+
+  const label = new ol.Overlay({
+    position: ol.proj.fromLonLat(museumLonLat),
+    positioning: 'bottom-center',
+    element: labelElement
+  });
+
+  map.addOverlay(label);
+</script>
+
+</body>
+</html>
