@@ -42,52 +42,36 @@
 </main>
 
 <script src="https://cdn.jsdelivr.net/npm/ol/ol.js" defer></script> 
-
-<script>
-    // **ÖNEMLİ:** ol.js yüklenmeden bu kod çalışırsa hata yine oluşur.
-    // Ancak defer niteliği ve scriptlerin sonda olması bu senaryoyu engeller.
+<script defer>
+    // Harita kodunun da defer ile sayfa yüklendikten sonra çalışmasını garantiliyoruz.
 
     const museumLonLat = [32.8597, 39.925];
 
-    // Harita başlatma fonksiyonu
-    function initMap() {
-        if (typeof ol === 'undefined') {
-            console.error("Hata: OpenLayers (ol) kütüphanesi yüklenemedi!");
-            return;
-        }
+    const map = new ol.Map({
+        target: 'map',
+        layers: [
+            new ol.layer.Tile({ source: new ol.source.OSM() })
+        ],
+        view: new ol.View({
+            center: ol.proj.fromLonLat(museumLonLat),
+            zoom: 16
+        }),
+        controls: ol.control.defaults().extend([new ol.control.FullScreen(), new ol.control.Zoom()])
+    });
 
-        const map = new ol.Map({
-            target: 'map',
-            layers: [
-                new ol.layer.Tile({ source: new ol.source.OSM() })
-            ],
-            view: new ol.View({
-                center: ol.proj.fromLonLat(museumLonLat),
-                zoom: 16
-            }),
-            controls: ol.control.defaults().extend([new ol.control.FullScreen(), new ol.control.Zoom()])
-        });
-
-        const marker = new ol.Feature({ geometry: new ol.geom.Point(ol.proj.fromLonLat(museumLonLat)) });
-        const vectorSource = new ol.source.Vector({ features: [marker] });
-        const markerLayer = new ol.layer.Vector({
-            source: vectorSource,
-            style: new ol.style.Style({
-                image: new ol.style.Icon({
-                    src: 'https://cdn-icons-png.flaticon.com/512/684/684908.png',
-                    scale: 0.05
-                })
+    const marker = new ol.Feature({ geometry: new ol.geom.Point(ol.proj.fromLonLat(museumLonLat)) });
+    const vectorSource = new ol.source.Vector({ features: [marker] });
+    const markerLayer = new ol.layer.Vector({
+        source: vectorSource,
+        style: new ol.style.Style({
+            image: new ol.style.Icon({
+                src: 'https://cdn-icons-png.flaticon.com/512/684/684908.png',
+                scale: 0.05
             })
-        });
+        })
+    });
 
-        map.addLayer(markerLayer);
-    }
-    
-    // Kütüphane yüklendiğinde haritayı başlatmak için bu fonksiyonu çağırıyoruz.
-    // defer niteliği işimizi görecektir, ancak OpenLayers'ın yüklenmesini dinleyebiliriz.
-
-    // Basit olması için initMap'i direkt çağırıyoruz. Eğer ol.js yüklenmişse çalışacaktır.
-    initMap(); 
+    map.addLayer(markerLayer);
 </script>
 </body>
 </html>
