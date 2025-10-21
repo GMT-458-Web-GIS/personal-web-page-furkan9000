@@ -4,7 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Anadolu Medeniyetleri Müzesi</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@latest/ol.css">
+
+  <!-- ✅ OpenLayers CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@6.15.1/ol.css">
+
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -69,8 +72,8 @@
 
   <div id="map"></div>
 
-  <!-- OpenLayers JS KÜTÜPHANESİ -->
-  <script src="https://cdn.jsdelivr.net/npm/ol@latest/dist/ol.js"></script>
+  <!-- ✅ OpenLayers JS (Doğru sırayla, 6.15.1 sürümü) -->
+  <script src="https://cdn.jsdelivr.net/npm/ol@6.15.1/dist/ol.js"></script>
 
   <script>
     // Haritayı oluştur
@@ -83,7 +86,7 @@
       ],
       view: new ol.View({
         center: ol.proj.fromLonLat([32.8597, 39.9334]), // Ankara koordinatları
-        zoom: 16
+        zoom: 17
       })
     });
 
