@@ -64,22 +64,23 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      margin-top: 10px;
+      margin-top: 15px;
       width: 100%;
     }
 
     .center-section .gif-container img {
-      width: 120px; /* GIF boyutu */
+      width: 180px; /* ✅ GIF büyütüldü */
       height: auto;
     }
 
     /* SAĞ KISIM */
     .right-section {
-      background-color: #f0f0f0;
+      background-color: #fff; /* ✅ Giriş kutusu beyaz */
       padding: 15px;
       border-radius: 8px;
       text-align: center;
       max-width: 250px;
+      box-shadow: 0 0 8px rgba(0,0,0,0.1);
     }
 
     .login-form {
@@ -126,6 +127,35 @@
 
     .main-nav button:hover {
       background-color: #333;
+    }
+
+    /* PLACES LİSTESİ (Baloncuk tarzı bağlantılar) */
+    .places-list {
+      list-style: none;
+      padding: 0;
+      margin: 20px auto;
+      max-width: 500px;
+    }
+
+    .places-list li {
+      background-color: #fff;
+      border: 2px solid #000;
+      border-radius: 30px;
+      padding: 12px;
+      margin: 10px 0;
+      text-align: center;
+      transition: all 0.3s;
+    }
+
+    .places-list li:hover {
+      background-color: #000;
+      color: #fff;
+    }
+
+    .places-list li a {
+      text-decoration: none;
+      color: inherit;
+      font-weight: bold;
     }
 
     /* SOHBET ALANI */
@@ -184,7 +214,8 @@
       <img src="images/furkan.jpg" alt="Furkan Ateş" class="profile-img">
       <div class="about">
         <h3>Furkan Ateş</h3>
-        <p>Merhaba, ben Furkan Ateş. Ankara'da Hacettepe Üniversitesi Harita Mühendisliği öğrencisiyim. Bu sitenin misyonu Ankara’daki önemli tarihi ve kültürel yerleri paylaşmaktır.</p>
+        <p>Merhaba, ben Furkan Ateş. Ankara'da Hacettepe Üniversitesi Harita Mühendisliği öğrencisiyim. 
+        Bu sitenin misyonu Ankara’daki önemli tarihi ve kültürel yerleri paylaşmaktır.</p>
       </div>
     </div>
 
