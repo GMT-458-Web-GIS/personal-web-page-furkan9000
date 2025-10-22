@@ -96,3 +96,7 @@ Project Owner and Developer
 This project is developed by © 2025 Furkan Ateş. All rights reserved.
 
 Note: This project is still in development and new features continue to be added. 
+
+Usage Area ExplanationCode Writing Support: You received assistance from GitHub Copilot or similar code completion tools while setting up the HTML structure or writing CSS styles. This increased your coding speed and reduced syntax errors. %15 using percent
+Content Development: You received support from Large Language Models (LLMs) like ChatGPT to edit texts, check their fluency, or enrich expressions while preparing the developer's "about" text, the site's mission statement, or the README file. %20 using percent
+Debugging: You asked AI tools about code errors or parts that did not work as expected to find solutions more quickly. %20 using percent
