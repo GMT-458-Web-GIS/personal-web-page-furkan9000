@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ankara Devlet Resim ve Heykel Müzesi - Ankara</title>
+  <title>TBMM Müzeleri (I. ve II. Meclis Binaları) - Ankara</title>
   <link rel="stylesheet" href="../css/style.css">
   <!-- ✅ OpenLayers CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@7.5.1/ol.css">
@@ -92,50 +92,54 @@
 <body>
 
 <header>
-  <h1>Ankara Devlet Resim ve Heykel Müzesi</h1>
+  <h1>TBMM Müzeleri (I. ve II. Meclis Binaları)</h1>
   <button onclick="window.location.href='../index.html'">🏠 Ana Sayfa</button>
 </header>
 
 <main class="museum-content">
 
   <section class="museum-description">
-    <h2>Ankara Devlet Resim ve Heykel Müzesi</h2>
-    <p>Türk plastik sanatlarının gelişimine tanıklık eden bu müze, Cumhuriyet döneminin önde gelen ressam ve heykeltıraşlarına ait değerli eserlerin sergilendiği ana merkezlerden biridir. Aynı zamanda sanatsal etkinliklere ve atölye çalışmalarına da ev sahipliği yapar.</p>
+    <h2>TBMM Müzeleri (I. ve II. Meclis Binaları)</h2>
+    <p>Türkiye Cumhuriyeti'nin kuruluş ve gelişim dönemlerinin siyasi tarihine odaklanan, Ankara Ulus'ta birbirine çok yakın iki önemli tarih müzesidir.</p>
   </section>
 
   <section class="museum-contents">
     <h2>Müze İçindekiler</h2>
     <ul>
-      <li>Fotoğraf</li>
-      <li>Hat</li>
-      <li>Resim</li>
-      <li>Heykel</li>
-      <li>Özgün Baskı</li>
-      <li>Seramik</li>
-      <li>Tezhip</li>
-      <li>Türk Süsleme Sanatları</li>
+      <li>Kurtuluş Savaşı Müzesi (I. TBMM Binası): 1920-1924 yılları arasında Birinci Meclis olarak kullanılmış ve Cumhuriyet'in ilanına tanıklık etmiştir. Milli Mücadele yıllarındaki ilk Meclis'in ruhunu ve çalışma düzenini yansıtır.</li>
+      <li>Cumhuriyet Müzesi (II. TBMM Binası): 1924-1960 yılları arasında İkinci Meclis olarak kullanılmış ve Atatürk devrimleri ile çok partili siyasi hayata geçiş gibi kritik dönemlere ev sahipliği yapmıştır. İlk üç cumhurbaşkanına (Atatürk, İnönü, Bayar) ait kişisel eşyaları ve döneme ait belgeleri sergiler.</li>
+
     </ul>
   </section>
 
   <section class="museum-images">
     <h2>Fotoğraflar</h2>
-    <img src="../images/ankara_devlet_resim_ve_heykel_müzesi.png" alt="Ankara Devlet Resim ve Heykel Müzesi">
+    <img src="../images/tbmm.jpg" alt="TBMM Müzeleri (I. ve II. Meclis Binaları)">
   </section>
 
-  <section class="museum-map">
-    <h2>Harita</h2>
-    <div id="map"></div>
-  </section>
+<section class="museum-map">
+  <h2>Harita</h2>
+  <div id="map"></div>
+</section>
 
 </main>
 
-<!-- ✅ OpenLayers JS (uyumlu versiyon) -->
+<!-- ✅ OpenLayers JS -->
 <script src="https://cdn.jsdelivr.net/npm/ol@7.5.1/dist/ol.js"></script>
 <script>
-  // Müze koordinatları
-  const museumLonLat = [32.8556, 39.9333]; // Ankara
+  // 📍 Koordinatlar (lon, lat formatında)
+  const locations = [
+    {
+      name: 'TBMM Müzeleri (I. Meclis Binası)',
+      coords: [32.8535, 39.9418]
+    },
+    {
+      name: 'Cumhuriyet Müzesi (II. TBMM Binası)',
+      coords: [32.8517, 39.9411]
+    }
+  ];
 
-  // Harita oluştur
+  // 🌍 Harita oluştur
   const map = new ol.Map({
     target: 'map',
     layers: [
@@ -144,26 +148,29 @@
       })
     ],
     view: new ol.View({
-      center: ol.proj.fromLonLat(museumLonLat),
+      center: ol.proj.fromLonLat([32.8526, 39.9415]), // ortalama merkez
       zoom: 17
     })
   });
 
-  // Etiket (overlay)
-  const labelElement = document.createElement('div');
-  labelElement.className = 'ol-label';
-  labelElement.innerHTML = 'Ankara Devlet Resim ve Heykel Müzesi';
+  // 🏷️ Her koordinat için etiket (overlay) ekle
+  locations.forEach(loc => {
+    const labelElement = document.createElement('div');
+    labelElement.className = 'ol-label';
+    labelElement.innerHTML = loc.name;
 
-  const label = new ol.Overlay({
-    position: ol.proj.fromLonLat(museumLonLat),
-    positioning: 'bottom-center',
-    element: labelElement
+    const label = new ol.Overlay({
+      position: ol.proj.fromLonLat(loc.coords),
+      positioning: 'bottom-center',
+      element: labelElement
+    });
+
+    map.addOverlay(label);
   });
-
-  map.addOverlay(label);
 </script>
 
 </body>
 </html>
+
 
 
