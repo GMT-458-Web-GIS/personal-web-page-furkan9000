@@ -54,7 +54,7 @@ header {
 .center-section .gif-container {
   width: 50%;           /* Başlık genişliğine göre ayarlayabilirsin */
   max-width: 400px;     /* Çok büyük ekranlarda sınırlama */
-  margin: 10px auto 0 auto; /* Ortala ve başlıktan boşluk bırak */
+  margin: 14px auto 0 auto; /* Ortala ve başlıktan boşluk bırak */
 }
 
 .center-section .gif-container img {
