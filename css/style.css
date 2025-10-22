@@ -1,201 +1,232 @@
-/* Genel yapı */
-body {
-  margin: 0;
-  font-family: "Segoe UI", Arial, sans-serif;
-  background-color: #d9d9d9; /* Mat gri */
-  color: #000;
-}
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ankara Rehberi - Furkan Ateş</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* === GENEL TASARIM === */
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Arial, sans-serif;
+      background-color: #d9d9d9;
+      color: #000;
+    }
 
-/* Üst kısım */
-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  padding: 20px;
-  background-color: #f5f5f5;
-  border-bottom: 3px solid #000;
-}
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding: 20px;
+      background-color: #f5f5f5;
+      border-bottom: 3px solid #000;
+    }
 
-/* Sol kısım (fotoğraf + hakkımda) */
-.left-section {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-  max-width: 200px;
-}
+    /* SOL KISIM */
+    .left-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      max-width: 200px;
+    }
 
-.profile-img {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  object-fit: cover;
-}
+    .profile-img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
 
-.about {
-  font-size: 14px;
-  text-align: center;
-}
+    .about {
+      font-size: 14px;
+      text-align: center;
+    }
 
-/* Orta kısım (başlık) */
-.center-section {
-  text-align: center;
-  flex: 1;
-  position: relative;
-}
+    /* ORTA KISIM */
+    .center-section {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center; /* Yatay ortalama */
+      justify-content: center; /* Dikey ortalama */
+      text-align: center;
+    }
 
-.center-section h1 {
-  font-size: 36px;
-  color: #000;
-  margin: 0 0 10px 0;
-}
+    .center-section h1 {
+      font-size: 36px;
+      color: #000;
+      margin: 0;
+    }
 
-/* GIF Başlık Altında ve Ortalanmış */
-.center-section .gif-container {
-  width: 50%;           /* Başlık genişliğine göre ayarlayabilirsin */
-  max-width: 400px;     /* Çok büyük ekranlarda sınırlama */
-  margin: 14px auto 0 auto; /* Ortala ve başlıktan boşluk bırak */
-}
+    .center-section .gif-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 10px;
+      width: 100%;
+    }
 
-.center-section .gif-container img {
-  width: 60%;          /* GIF container ile aynı genişlikte */
-  height: auto;         /* Oran bozulmasın */
-  display: block;
-}
+    .center-section .gif-container img {
+      width: 120px; /* GIF boyutu */
+      height: auto;
+    }
 
-/* Lokasyon animasyonu (eski küçük GIF) */
-.center-section .location-animation {
-  width: 60px;
-  height: 60px;
-  display: block;
-  margin: 10px auto 0 auto;
-}
+    /* SAĞ KISIM */
+    .right-section {
+      background-color: #f0f0f0;
+      padding: 15px;
+      border-radius: 8px;
+      text-align: center;
+      max-width: 250px;
+    }
 
-/* Sağ kısım (üyelik/giriş) */
-.right-section {
-  background-color: #f0f0f0;
-  padding: 15px;
-  border-radius: 8px;
-  text-align: center;
-  max-width: 250px;
-}
+    .login-form {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
 
-.login-form {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
+    .login-form input {
+      padding: 6px;
+      border: 1px solid #aaa;
+      border-radius: 4px;
+    }
 
-.login-form input {
-  padding: 6px;
-  border: 1px solid #aaa;
-  border-radius: 4px;
-}
+    .login-form button {
+      background-color: #000;
+      color: white;
+      border: none;
+      padding: 6px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
 
-.login-form button {
-  background-color: #000;
-  color: white;
-  border: none;
-  padding: 6px;
-  border-radius: 4px;
-  cursor: pointer;
-}
+    .register-text a {
+      color: #000;
+      text-decoration: underline;
+    }
 
-.register-text a {
-  color: #000;
-  text-decoration: underline;
-}
+    /* PLACES BUTONU */
+    .main-nav {
+      text-align: center;
+      margin: 20px 0;
+    }
 
-/* Places butonu */
-.main-nav {
-  text-align: center;
-  margin: 20px 0;
-}
+    .main-nav button {
+      padding: 10px 25px;
+      background-color: #000;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 16px;
+    }
 
-.main-nav button {
-  padding: 10px 25px;
-  background-color: #000;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 16px;
-}
+    .main-nav button:hover {
+      background-color: #333;
+    }
 
-.main-nav button:hover {
-  background-color: #333;
-}
+    /* SOHBET ALANI */
+    .chat-section {
+      margin: 20px;
+      background-color: #f7f7f7;
+      padding: 20px;
+      border-radius: 10px;
+    }
 
-/* Sohbet / Yorum Alanı */
-.chat-section {
-  margin: 20px;
-  background-color: #f7f7f7;
-  padding: 20px;
-  border-radius: 10px;
-}
+    .chat-section h2 {
+      margin-bottom: 10px;
+    }
 
-.chat-section h2 {
-  margin-bottom: 10px;
-}
+    .comments p {
+      background-color: #ececec;
+      padding: 8px;
+      border-radius: 6px;
+      margin: 5px 0;
+    }
 
-.comments p {
-  background-color: #ececec;
-  padding: 8px;
-  border-radius: 6px;
-  margin: 5px 0;
-}
+    .comment-form textarea {
+      width: 100%;
+      height: 60px;
+      margin-top: 10px;
+      padding: 8px;
+      border-radius: 6px;
+      border: 1px solid #aaa;
+    }
 
-.comment-form textarea {
-  width: 100%;
-  height: 60px;
-  margin-top: 10px;
-  padding: 8px;
-  border-radius: 6px;
-  border: 1px solid #aaa;
-}
+    .comment-form button {
+      margin-top: 10px;
+      background-color: #000;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
 
-.comment-form button {
-  margin-top: 10px;
-  background-color: #000;
-  color: white;
-  border: none;
-  padding: 8px 16px;
-  border-radius: 6px;
-  cursor: pointer;
-}
+    /* ALT BİLGİ */
+    footer {
+      background-color: #000;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      font-size: 14px;
+      margin-top: 30px;
+    }
+  </style>
+</head>
+<body>
+  <!-- ÜST KISIM -->
+  <header>
+    <div class="left-section">
+      <img src="images/furkan.jpg" alt="Furkan Ateş" class="profile-img">
+      <div class="about">
+        <h3>Furkan Ateş</h3>
+        <p>Merhaba, ben Furkan Ateş. Ankara'da Hacettepe Üniversitesi Harita Mühendisliği öğrencisiyim. Bu sitenin misyonu Ankara’daki önemli tarihi ve kültürel yerleri paylaşmaktır.</p>
+      </div>
+    </div>
 
-/* Footer */
-footer {
-  background-color: #000;
-  color: white;
-  text-align: center;
-  padding: 15px;
-  font-size: 14px;
-  margin-top: 30px;
-}
+    <div class="center-section">
+      <h1>ANKARA REHBERİ</h1>
+      <div class="gif-container">
+        <img src="images/earth.gif" alt="Dünya Lokasyon İmleci">
+      </div>
+    </div>
 
-/* Places list sayfası */
-.places-list {
-  list-style: none;
-  padding: 0;
-  margin: 20px auto;
-  max-width: 500px;
-}
+    <div class="right-section">
+      <h3>Üye Girişi</h3>
+      <form class="login-form">
+        <input type="text" placeholder="Kullanıcı adı" required>
+        <input type="password" placeholder="Şifre" required>
+        <button type="submit">Giriş</button>
+      </form>
+      <p class="register-text">Hesabın yok mu? <a href="#">Kayıt ol</a></p>
+    </div>
+  </header>
 
-.places-list li {
-  margin: 8px 0;
-  background-color: #f0f0f0;
-  padding: 10px;
-  border-radius: 6px;
-  text-align: center;
-}
+  <!-- GEZİN BUTONU -->
+  <nav class="main-nav">
+    <button onclick="window.location.href='places.html'">📍 GEZİN</button>
+  </nav>
 
-.places-list li a {
-  text-decoration: none;
-  color: #000;
-  font-weight: bold;
-}
+  <!-- YORUM ALANI -->
+  <section class="chat-section">
+    <h2>💬 Sohbet ve Yorumlar</h2>
+    <div class="comments">
+      <p><strong>Ali:</strong> Harita kısmını çok beğendim!</p>
+      <p><strong>Ayşe:</strong> Ankara Kalesi sayfası harika olmuş 👏</p>
+    </div>
+    <form class="comment-form">
+      <textarea placeholder="Yorumunuzu yazın..."></textarea>
+      <button type="submit">Gönder</button>
+    </form>
+  </section>
 
-.places-list li a:hover {
-  color: #0077cc;
-}
+  <!-- ALT BİLGİ -->
+  <footer>
+    <p>&copy; 2025 Furkan Ateş | Tüm hakları saklıdır.</p>
+  </footer>
+</body>
+</html>
