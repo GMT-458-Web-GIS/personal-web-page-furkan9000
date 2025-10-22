@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ankara Devlet Resim ve Heykel Müzesi - Ankara</title>
+  <title>ODTÜ Bilim ve Teknoloji Müzesi - Ankara</title>
   <link rel="stylesheet" href="../css/style.css">
   <!-- ✅ OpenLayers CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@7.5.1/ol.css">
@@ -92,34 +92,30 @@
 <body>
 
 <header>
-  <h1>Ankara Devlet Resim ve Heykel Müzesi</h1>
+  <h1>ODTÜ Bilim ve Teknoloji Müzesi</h1>
   <button onclick="window.location.href='../index.html'">🏠 Ana Sayfa</button>
 </header>
 
 <main class="museum-content">
 
   <section class="museum-description">
-    <h2>Ankara Devlet Resim ve Heykel Müzesi</h2>
-    <p>Türk plastik sanatlarının gelişimine tanıklık eden bu müze, Cumhuriyet döneminin önde gelen ressam ve heykeltıraşlarına ait değerli eserlerin sergilendiği ana merkezlerden biridir. Aynı zamanda sanatsal etkinliklere ve atölye çalışmalarına da ev sahipliği yapar.</p>
+    <h2>ODTÜ Bilim ve Teknoloji Müzesi</h2>
+    <p>Orta Doğu Teknik Üniversitesi (ODTÜ) kampüsünde yer alır ve bilim ile teknolojinin tarihini konu edinir. Müze, tarım, sanayi, ulaşım, iletişim gibi çeşitli alanlarda kullanılan makine ve araçları sergileyerek gençlere bilimsel merak aşılamayı hedefler. Genellikle etkinliklerde kullanılan konferans alanı olarak kullanılmaktadır. </p>
   </section>
 
   <section class="museum-contents">
     <h2>Müze İçindekiler</h2>
     <ul>
-      <li>Fotoğraf</li>
-      <li>Hat</li>
-      <li>Resim</li>
-      <li>Heykel</li>
-      <li>Özgün Baskı</li>
-      <li>Seramik</li>
-      <li>Tezhip</li>
-      <li>Türk Süsleme Sanatları</li>
+      <li>Teknolojik Ürünler</li>
+      <li>Ulaşım Ürünleri</li>
+      <li>Tarım Ürünleri</li>
+
     </ul>
   </section>
 
   <section class="museum-images">
     <h2>Fotoğraflar</h2>
-    <img src="../images/ankara_devlet_resim_ve_heykel_müzesi.png" alt="Ankara Devlet Resim ve Heykel Müzesi">
+    <img src="../images/odtu.jpg" alt="ODTÜ Bilim ve Teknoloji Müzesi">
   </section>
 
   <section class="museum-map">
@@ -133,7 +129,7 @@
 <script src="https://cdn.jsdelivr.net/npm/ol@7.5.1/dist/ol.js"></script>
 <script>
   // Müze koordinatları
-  const museumLonLat = [32.8556, 39.9333]; // Ankara
+  const museumLonLat = [32.7710, 39.9013]; // Ankara
 
   // Harita oluştur
   const map = new ol.Map({
@@ -152,7 +148,7 @@
   // Etiket (overlay)
   const labelElement = document.createElement('div');
   labelElement.className = 'ol-label';
-  labelElement.innerHTML = 'Ankara Devlet Resim ve Heykel Müzesi';
+  labelElement.innerHTML = 'ODTÜ Bilim ve Teknoloji Müzesi';
 
   const label = new ol.Overlay({
     position: ol.proj.fromLonLat(museumLonLat),
