@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ankara Devlet Resim ve Heykel Müzesi - Ankara</title>
+  <title>Somut Olmayan Kültürel Miras Müzesi (Gazi Üniversitesi) - Ankara</title>
   <link rel="stylesheet" href="../css/style.css">
   <!-- ✅ OpenLayers CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@7.5.1/ol.css">
@@ -92,34 +92,32 @@
 <body>
 
 <header>
-  <h1>Ankara Devlet Resim ve Heykel Müzesi</h1>
+  <h1>Somut Olmayan Kültürel Miras Müzesi (Gazi Üniversitesi)</h1>
   <button onclick="window.location.href='../index.html'">🏠 Ana Sayfa</button>
 </header>
 
 <main class="museum-content">
 
   <section class="museum-description">
-    <h2>Ankara Devlet Resim ve Heykel Müzesi</h2>
-    <p>Türk plastik sanatlarının gelişimine tanıklık eden bu müze, Cumhuriyet döneminin önde gelen ressam ve heykeltıraşlarına ait değerli eserlerin sergilendiği ana merkezlerden biridir. Aynı zamanda sanatsal etkinliklere ve atölye çalışmalarına da ev sahipliği yapar.</p>
+    <h2>Somut Olmayan Kültürel Miras Müzesi (Gazi Üniversitesi)</h2>
+    <p>Gazi Üniversitesi Türk Halkbilimi öğretim üyelerinin özverili çalışmaları ve Ankara Kalkına Ajansı’nın maddi katkıları sonucu 15 Haziran 2013 tarihinde açılan Somut Olmayan Kültürel Miras Müzesi, kendi alanında Türkiye’nin ilk müzesidir.
+
+Müze düzenlediği etkinlikler ile bir çok kültürel değeri uygulamalı olarak yaşatır. Karagöz-Hacivat, orta oyunu, meddah gösterileri, köy seyirlik oyunları, çocuk oyunları müzenin sergilediği geleneksel oyunlar arasındadır. Ihlamur Baskı ve Ebru gibi el sanatları da müzenin etkinlikleri arasında yer almaktadır. Ayrıca; Ankara'ya has masallar, türküler, hikâyeler, ninniler, maniler, geleneksel sohbet toplantıları, temsili kına gecesi, diş hediği, asker kınası gibi birçok kültürel değer müzede canlandırılmaktadır.</p>
   </section>
 
   <section class="museum-contents">
     <h2>Müze İçindekiler</h2>
     <ul>
-      <li>Fotoğraf</li>
-      <li>Hat</li>
-      <li>Resim</li>
-      <li>Heykel</li>
-      <li>Özgün Baskı</li>
-      <li>Seramik</li>
-      <li>Tezhip</li>
-      <li>Türk Süsleme Sanatları</li>
-    </ul>
+      <li>Orta Oyunları</li>
+      <li>Meddah Seyirleri</li>
+      <li>Ihlamur Baskı ve Ebru Gibi El Sanatları</li>
+      <li>Maniler Gibi Sözel Olan Tarihi Öğeler vb.</li>
+
   </section>
 
   <section class="museum-images">
     <h2>Fotoğraflar</h2>
-    <img src="../images/ankara_devlet_resim_ve_heykel_müzesi.png" alt="Ankara Devlet Resim ve Heykel Müzesi">
+    <img src="../images/soyut.jpg" alt="Somut Olmayan Kültürel Miras Müzesi (Gazi Üniversitesi)">
   </section>
 
   <section class="museum-map">
@@ -133,7 +131,7 @@
 <script src="https://cdn.jsdelivr.net/npm/ol@7.5.1/dist/ol.js"></script>
 <script>
   // Müze koordinatları
-  const museumLonLat = [32.8556, 39.9333]; // Ankara
+  const museumLonLat = [32.8641, 39.9341]; // Ankara
 
   // Harita oluştur
   const map = new ol.Map({
@@ -152,7 +150,7 @@
   // Etiket (overlay)
   const labelElement = document.createElement('div');
   labelElement.className = 'ol-label';
-  labelElement.innerHTML = 'Ankara Devlet Resim ve Heykel Müzesi';
+  labelElement.innerHTML = 'Somut Olmayan Kültürel Miras Müzesi (Gazi Üniversitesi)';
 
   const label = new ol.Overlay({
     position: ol.proj.fromLonLat(museumLonLat),
